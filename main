@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+require 'yaml'
+require_relative 'exportsubsvg.rb'
+require 'byebug'
+
+def isAnterior?(oldFile, newFile)
+  File.mtime(oldFile) < File.mtime(newFile)
+end
+
+configurationFile = ARGV[0].to_s
+
+# charger la configuration
+configuration = YAML.load(File.read(configurationFile))['subsvgexport']
+
+# pour chaque fichier source/destination
+Dir.chdir(File.dirname(configurationFile)) do
+  configuration.each do |options|
+    if File.readable?(options['source'])
+      options['objects'].each do |object|
+        begin
+          next if isAnterior? options['source'], object['output']
+        rescue
+        end
+        exportsubsvg options['source'], object
+      end
+    end
+  end
+end
