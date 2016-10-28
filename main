@@ -2,7 +2,6 @@
 # encoding: utf-8
 require 'yaml'
 require_relative 'exportsubsvg.rb'
-require 'byebug'
 
 def isAnterior?(oldFile, newFile)
   File.mtime(oldFile) < File.mtime(newFile)
