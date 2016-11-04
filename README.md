@@ -1,6 +1,6 @@
 # designexporter-plugin-subsvgexport
 A plugin to export identified objects to png with inkscape.
-Be carefull ot have the corresponding layers set to visible.
+Visibility of layers is forced so even objects that are on a hidden layers will be exported.
 
 config file goes like this:
 ```yaml
